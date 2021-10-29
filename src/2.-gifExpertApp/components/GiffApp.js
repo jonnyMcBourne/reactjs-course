@@ -1,58 +1,50 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../index.css'
 import { AddCategory } from './AddCategory';
-export const GiffApp = () => {
-    const [category, setCategory] = useState({});
-    const [categories, setCategories]= useState([])
-        const onChangeCategory=(e)=>{
-            const {target} = e;
-            setCategory({...category,[target.id]:target.value});
-        };
-        console.log(categories)
 
-        const addCategory=(e)=>{
-            e.preventDefault();
-            setCategories([...categories,category])
-        }
+export const GiffApp = () => {
+
+  const [category,setCategory ] = useState('');
+  const [categories, setCategories] = useState([]);
+  
+  console.log(categories);
+
+  useEffect(() => {
+    if(category !== ''){
+      getGiffs();
+    }
+  },[category])
+
+
+
+
+  const getGiffs = () => {
+    const url = new URL("https://api.giphy.com/v1/gifs/search");
+    var params = {
+      api_key: "za7As88APho69VcPk6t9PW2nrHzeSb60",
+      limit: "10",
+      q: `${category}`,
+    };
+    url.search = new URLSearchParams(params).toString();
+
+    fetch(url).then((resp) => {
+      resp.json().then(({ data }) => {
+        setCategories(data.map((x) => {
+          return { id: x.id, title: x.title, img: x.images.downsized_large.url };
+        }));
+      });
+    });
+  };
 
     return (
       <div>
         GiffExpert
         <hr />
-        <AddCategory />
-        <form onSubmit={addCategory}>
-        <div>
-          <input
-            type="text"
-            id="category"
-            name="category"
-            placeholder="placeholder"
-            onChange={onChangeCategory}
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            id="category2"
-            name="category2"
-            placeholder="find your giff"
-            onChange={onChangeCategory}
-          />
-        </div>
-        <div>
-            <input
-            type="checkbox"
-            id="age"
-            name="age"
-            onChange={onChangeCategory}
-            />
-        </div>
-        <input type="submit" name="addbutton" value="Add" />
-        </form>
+        <AddCategory
+          setCategory={setCategory}
+        />
         <ul>
-          {
-            // categories.map((x,i)=><li key={i}>{x}</li>)
-          }
+          {categories.map((x)=>(<> <img src={x.img} /> </>))}
         </ul>
       </div>
     );
