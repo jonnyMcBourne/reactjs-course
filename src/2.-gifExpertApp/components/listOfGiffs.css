@@ -4,3 +4,27 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+
+  
+  /* RESPONSIVE DESIGN*/
+  
+  /*cellphone Xl*/
+  @media screen and (min-width: 260px) {
+
+  }
+  
+  /*cellphone Xl*/
+  @media screen and (min-width: 480px) {
+
+  }
+  
+  /*Tablet*/
+  @media screen and (min-width: 767px) {
+
+  }
+  
+  /*Web*/
+  @media screen and (min-width: 950px) {
+
+  }

@@ -33,3 +33,66 @@
     position: relative;
     bottom: 10%;
 }
+
+  /* RESPONSIVE DESIGN*/
+  
+  /*cellphone Xl*/
+  @media screen and (min-width: 260px) {
+    .container {
+        width: 80%;
+        height: 25vh;
+        margin-right: 1.5%;
+        margin-bottom: 1.5%;
+        margin-top: 1.5%;
+        margin-left: 1.5%;
+        padding-top: 5%;
+
+    }
+
+}
+
+/*cellphone Xl*/
+@media screen and (min-width: 480px) {
+
+}
+
+/*Tablet*/
+@media screen and (min-width: 767px) {
+    .container {
+        width: 40%;
+        height: 25vh;
+        margin-right: 1.5%;
+        margin-bottom: 1.5%;
+        margin-top: 1.5%;
+        margin-left: 1.5%;
+        padding-top: 5%;
+    }
+
+}
+
+@media screen and (min-width: 920px) {
+    .container {
+        width: 30%;
+        height: 25vh;
+        margin-right: 1.5%;
+        margin-bottom: 1.5%;
+        margin-top: 1.5%;
+        margin-left: 1.5%;
+        padding-top: 5%;
+    }
+
+}
+
+/*Web*/
+@media screen and (min-width: 1020px) {
+    .container {
+        width: 20%;
+        height: 25vh;
+        margin-right: 1.5%;
+        margin-bottom: 1.5%;
+        margin-top: 1.5%;
+        margin-left: 1.5%;
+        padding-top: 5%;
+    }
+
+}

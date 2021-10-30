@@ -1,49 +1,23 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 import { AddCategory } from "./AddCategory";
-import { GiffCard } from "./GiffCard";
 import { ListOfGiffs } from "./ListOfGiffs";
+import {useFetch} from '../api/useFetch';
 
 export const GiffApp = () => {
+  
   const [category, setCategory] = useState("");
-  const [categories, setCategories] = useState([]);
+  const {categories,getGiffs} = useFetch(category);
 
   useEffect(() => {
     if (category !== "") {
-      getGiffs();
+      getGiffs(category)
     }
   }, [category]);
 
-  const getGiffs = () => {
-    const url = new URL("https://api.giphy.com/v1/gifs/search");
-    var params = {
-      api_key: "za7As88APho69VcPk6t9PW2nrHzeSb60",
-      limit: "12",
-      q: `${category}`,
-    };
-    url.search = new URLSearchParams(params).toString();
-
-    fetch(url).then((resp) => {
-      resp.json().then(({ data }) => {
-        setCategories(
-          [
-            data.map((x) => {
-              return {
-                id: x.id,
-                title: x.title,
-                img: x.images.downsized_large.url,
-              };
-            }),
-            ...categories
-          ].flat()
-        );
-      });
-    });
-  };
-
   return (
     <div>
-      GiffExpert
+      <h1>GiffExpert</h1> 
       <hr />
       <AddCategory setCategory={setCategory} />
       <ListOfGiffs categories={categories}/>
