@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useFetch = (category) => {
+export const useFetch = () => {
 
     const [categories,setCategories] = useState([]);
 

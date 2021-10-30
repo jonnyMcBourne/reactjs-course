@@ -13,7 +13,7 @@ export const GiffApp = () => {
     if (category !== "") {
       getGiffs(category)
     }
-  }, [category]);
+  },[category]);
 
   return (
     <div>
