@@ -1,51 +1,52 @@
-import React, { useEffect, useState } from 'react'
-import '../index.css'
-import { AddCategory } from './AddCategory';
+import React, { useEffect, useState } from "react";
+import "./index.css";
+import { AddCategory } from "./AddCategory";
+import { GiffCard } from "./GiffCard";
+import { ListOfGiffs } from "./ListOfGiffs";
 
 export const GiffApp = () => {
-
-  const [category,setCategory ] = useState('');
+  const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
-  
-  console.log(categories);
 
   useEffect(() => {
-    if(category !== ''){
+    if (category !== "") {
       getGiffs();
     }
-  },[category])
-
-
-
+  }, [category]);
 
   const getGiffs = () => {
     const url = new URL("https://api.giphy.com/v1/gifs/search");
     var params = {
       api_key: "za7As88APho69VcPk6t9PW2nrHzeSb60",
-      limit: "10",
+      limit: "12",
       q: `${category}`,
     };
     url.search = new URLSearchParams(params).toString();
 
     fetch(url).then((resp) => {
       resp.json().then(({ data }) => {
-        setCategories(data.map((x) => {
-          return { id: x.id, title: x.title, img: x.images.downsized_large.url };
-        }));
+        setCategories(
+          [
+            data.map((x) => {
+              return {
+                id: x.id,
+                title: x.title,
+                img: x.images.downsized_large.url,
+              };
+            }),
+            ...categories
+          ].flat()
+        );
       });
     });
   };
 
-    return (
-      <div>
-        GiffExpert
-        <hr />
-        <AddCategory
-          setCategory={setCategory}
-        />
-        <ul>
-          {categories.map((x)=>(<> <img src={x.img} /> </>))}
-        </ul>
-      </div>
-    );
-}
+  return (
+    <div>
+      GiffExpert
+      <hr />
+      <AddCategory setCategory={setCategory} />
+      <ListOfGiffs categories={categories}/>
+    </div>
+  );
+};
