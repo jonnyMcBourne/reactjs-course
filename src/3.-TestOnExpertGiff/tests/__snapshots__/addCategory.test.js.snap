@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TEST ON COMPONENT ADDCATEGORY test on main component renders properly 1`] = `
+<div>
+  <h1>
+    GiffExpert
+  </h1>
+  <hr />
+  <AddCategory
+    setCategory={[Function]}
+  />
+  <ListOfGiffs
+    categories={Array []}
+  />
+</div>
+`;

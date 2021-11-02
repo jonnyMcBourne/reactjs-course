@@ -19,6 +19,7 @@ export const useFetch = () => {
     
       fetch(url).then((resp) => {
         resp.json().then(({ data }) => {
+          data&&
           setCategories(
             [
               data.map((x) => {
@@ -31,8 +32,8 @@ export const useFetch = () => {
               ...categories,
             ].flat()
           );
-        });
-      });
+        }).catch(error=>{console.log('error',error)})
+      }).catch(error=>{console.log('error',error)})
     };
 
     return {categories,getGiffs};
