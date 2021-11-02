@@ -7,22 +7,19 @@ import {GiffApp} from '../../2.-gifExpertApp/components/GiffApp';
 describe('TEST ON COMPONENT ADDCATEGORY',()=>{
     //Global Variables
         const wrapperglobal = shallow(<GiffApp/>);
+        let setCategory = jest.fn();
+        let wrapperCategory = shallow(<AddCategory setCategory={setCategory}/>);
+      
+      beforeEach(()=>{
+        console.log('new')
+        setCategory = jest.fn();
+        wrapperCategory = shallow(<AddCategory setCategory={setCategory}/>);
+          
+      })
         
-        const setCategory = jest.fn()
-        let wrapperCategory = shallow(<AddCategory setCategory={setCategory}/>)
+ 
         
-        const changeInput=()=>{
-            //arrange
-            const input=wrapperCategory.find('input').at(0)
-            const value ='hello world';
-                //act
-            input.simulate('change',{target:{value:value}});
-        }
-
-        beforeEach(()=>{
-            //jest.clearAllMocks();
-            wrapperCategory = shallow(<AddCategory setCategory={setCategory}/>)
-        })
+     
 
     test('test on main component renders properly',()=>{
         expect(wrapperglobal).toMatchSnapshot();
@@ -37,17 +34,7 @@ describe('TEST ON COMPONENT ADDCATEGORY',()=>{
             //assert
         expect(wrapperCategory.find('p').text().trim() ).toBe(value)
     });
-
-
-    test('shouldnt submit',()=>{
-        //arrange
-        const form=wrapperCategory.find('form');
-        //act
-        form.simulate('submit', { preventDefault(){}  });
-        //assert
-        expect(setCategory).not.toHaveBeenCalled();
-    });
-
+    
     test('should submit',()=>{
         //arrange
         const input=wrapperCategory.find('input').at(0);
@@ -59,9 +46,14 @@ describe('TEST ON COMPONENT ADDCATEGORY',()=>{
         //assert
         expect(setCategory).toHaveBeenCalled();
     });
-
-
-
     
-    
+    test('shouldnt submit',()=>{
+        //arrange
+        const form=wrapperCategory.find('form');
+        //act
+        form.simulate('submit', { preventDefault(){}  });
+        //assert
+        expect(setCategory).not.toHaveBeenCalled();
+    });
+
 });
